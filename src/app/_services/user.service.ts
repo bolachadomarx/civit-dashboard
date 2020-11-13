@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod'
 import { Observable } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
@@ -7,7 +8,7 @@ type UserAddModel = Omit<UserModel, 'id'>
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  url = 'http://localhost:3000'
+  url = environment.api
 
   constructor(private http: HttpClient) {}
 

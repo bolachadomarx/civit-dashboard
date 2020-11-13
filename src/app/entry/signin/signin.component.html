@@ -7,19 +7,19 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <div fxLayout="column">
+      <div fxLayout="column" [formGroup]="loginForm">
         <mat-form-field class="w-100" fxFlex="100" appearance="standard">
           <mat-label>Email</mat-label>
-          <input matInput>
+          <input type="email" formControlName="email" matInput>
         </mat-form-field>
         <mat-form-field class="w-100" fxFlex="100" appearance="standard">
           <mat-label>Senha</mat-label>
-          <input matInput>
+          <input type="password" formControlName="password" matInput>
         </mat-form-field>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button color="primary" mat-raised-button>Entrar</button>
+      <button (click)="login()" color="primary" mat-raised-button>Entrar</button>
     </mat-card-actions>
   </mat-card>
 </div>

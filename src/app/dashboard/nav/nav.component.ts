@@ -1,7 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { map, shareReplay } from 'rxjs/operators'
+import { AuthenticationService } from 'src/app/_services/authentication.service'
 
 @Component({
   selector: 'app-nav',
@@ -13,11 +15,16 @@ export class NavComponent implements OnInit {
     map((result) => result.matches),
     shareReplay()
   )
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private authenticationService: AuthenticationService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {}
 
   logout() {
-    console.log('Deslogou')
+    this.authenticationService.logout()
+    this.route.navigate(['/login'])
   }
 }
