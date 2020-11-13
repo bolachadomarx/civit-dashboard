@@ -1,0 +1,25 @@
+<div fxLayout="row" style="min-height: 80vh;" fxLayoutAlign="center center">
+  <mat-card fxFlex="50">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>Para acessar as outras funcionalidades do sistema você deve fazer login. Caso não senha
+        cadastro no sistema, <a [routerLink]="[ '/cadastro' ]">clique aqui</a>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column">
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-label>Email</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-label>Senha</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button color="primary" mat-raised-button>Entrar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
