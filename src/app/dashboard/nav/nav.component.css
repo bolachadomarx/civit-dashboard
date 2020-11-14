@@ -22,18 +22,28 @@
 }
 
 .sidenav {
-  width: 220px;
+  width: 250px;
 }
 
 .nav-caption {
   margin-left: 10px;
+  color: white;
 }
 
 .active-list-item {
-  color: #00bfa5;
-  border-left: 4px solid #00bfa5;
+  border-left: 3px solid white;
+  box-sizing: border-box;
 }
 
 ::ng-deep .mat-menu-content {
   width: 220px;
+}
+
+.mat-drawer.mat-drawer-side {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.icon {
+  color: white;
 }
