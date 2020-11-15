@@ -7,9 +7,12 @@ import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr'
+import { DndDirective } from './_directives/dnd.directive'
+import { ProgressComponent } from './_components/progress/progress.component'
+import { DragndropComponent } from './_components/dragndrop/dragndrop.component'
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DndDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,

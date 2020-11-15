@@ -1,1 +1,29 @@
-<p>create-report works!</p>
+<div class="m-3" fxLayout="row" style="min-height: 80vh;" fxLayoutAlign="center center">
+  <mat-card fxFlex="50">
+    <mat-card-header>
+      <mat-card-title>Enviar denúncia</mat-card-title>
+      <mat-card-subtitle>Para enviar a denúncia você deve adicionar uma foto e algumas informações a respeito.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column" fxFlexFill>
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-label>Tipo de problema</mat-label>
+          <input type="email" matInput>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Descrição do problema</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+        <app-dragndrop class="w-100" [files]="files" (filesChange)="updateFiles($event)"></app-dragndrop>
+        <div *ngIf="apiLoaded | async">
+          <google-map></google-map>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button color="primary" mat-raised-button>Entrar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

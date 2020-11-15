@@ -1,0 +1,38 @@
+<div fxLayout="row">
+  <mat-card fxFlex="100">
+    <mat-card-header>
+      <mat-card-title>Arraste as fotos do ocorrido</mat-card-title>
+      <mat-card-subtitle>ou clique no card</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div appDnd (fileDropped)="onFileDropped($event)" style="min-height: 200px;border: 1px dashed black;"
+        fxLayout="row">
+        <div fxflex>
+          <input class="w-100 h-100" type="file" #fileDropRef id="fileDropRef" multiple
+            (change)="fileBrowseHandler($event.target.files)" />
+        </div>
+      </div>
+    </mat-card-content>
+
+    <div fxLayout="column">
+      <mat-list fxFlex="100">
+        <div mat-subheader>Fotos</div>
+        <mat-list-item *ngFor="let file of files; let i = index">
+
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <div mat-line> {{ file?.name }} </div>
+          <div mat-line> {{ formatBytes(file?.size, 2) }} </div>
+          <div fxLayout="row" fxLayoutAlign="center center" mat-line>
+            <div fxFlex="90">
+              <app-progress [progress]="file?.progress"></app-progress>
+            </div>
+            <div fxFlex="10">
+              <mat-icon (click)="deleteFile(i)" color="primary">delete</mat-icon>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-card>
+</div>
