@@ -1,3 +1,4 @@
+import { DndDirective } from './../_directives/dnd.directive'
 import { ProgressComponent } from './../_components/progress/progress.component'
 import { DragndropComponent } from './../_components/dragndrop/dragndrop.component'
 import { MaterialModule } from './../material.module'
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http'
 import { GoogleMapsModule } from '@angular/google-maps'
+import { MapsComponent } from '../_components/maps/maps.component'
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
     FaqComponent,
     DragndropComponent,
     ProgressComponent,
+    MapsComponent,
+    DndDirective,
   ],
   imports: [
     CommonModule,

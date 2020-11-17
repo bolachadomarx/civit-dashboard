@@ -12,7 +12,7 @@ import { ProgressComponent } from './_components/progress/progress.component'
 import { DragndropComponent } from './_components/dragndrop/dragndrop.component'
 
 @NgModule({
-  declarations: [AppComponent, DndDirective],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

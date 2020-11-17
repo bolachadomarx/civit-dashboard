@@ -22,7 +22,7 @@ export class DndDirective {
   }
 
   // Drop listener
-  @HostListener('drop', ['$event']) public ondrop(evt) {
+  @HostListener('drop', ['$event']) public async ondrop(evt) {
     evt.preventDefault()
     evt.stopPropagation()
     this.fileOver = false

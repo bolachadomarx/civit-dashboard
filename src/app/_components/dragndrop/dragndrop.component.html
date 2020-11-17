@@ -23,9 +23,7 @@
           <div mat-line> {{ file?.name }} </div>
           <div mat-line> {{ formatBytes(file?.size, 2) }} </div>
           <div fxLayout="row" fxLayoutAlign="center center" mat-line>
-            <div fxFlex="90">
-              <app-progress [progress]="file?.progress"></app-progress>
-            </div>
+
             <div fxFlex="10">
               <mat-icon (click)="deleteFile(i)" color="primary">delete</mat-icon>
             </div>

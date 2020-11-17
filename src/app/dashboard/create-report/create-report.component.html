@@ -5,25 +5,40 @@
       <mat-card-subtitle>Para enviar a denúncia você deve adicionar uma foto e algumas informações a respeito.
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content [formGroup]="incidentForm">
       <div fxLayout="column" fxFlexFill>
         <mat-form-field class="w-100" fxFlex="100" appearance="standard">
-          <mat-label>Tipo de problema</mat-label>
-          <input type="email" matInput>
+          <mat-label>Título do problema</mat-label>
+          <input formControlName="title" matInput placeholder="Título do problema">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+          <mat-select formControlName="category" placeholder="Tipo de incidente" name="item">
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{category}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="100">
           <mat-label>Descrição do problema</mat-label>
-          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-            cdkAutosizeMaxRows="5"></textarea>
+          <textarea formControlName="description" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
         </mat-form-field>
-        <app-dragndrop class="w-100" [files]="files" (filesChange)="updateFiles($event)"></app-dragndrop>
-        <div *ngIf="apiLoaded | async">
-          <google-map></google-map>
+        <div fxFlex="100">
+          <app-dragndrop [files]="files" (filesChange)="updateFiles($event)"></app-dragndrop>
+
         </div>
+        <div fxFlexFill fxFlex="100">
+          <app-maps (mark)="mark($event)" style="min-height: 1900px;"
+            [center]="{ lat: -22.423598852829794, lng: -45.45821814058468 }" [markerOptions]="{draggable: false}">
+          </app-maps>
+        </div>
+
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button color="primary" mat-raised-button>Entrar</button>
+      <button [disabled]="incidentForm.invalid" color="primary" (click)="save()" mat-raised-button>Enviar
+        denúncia</button>
     </mat-card-actions>
   </mat-card>
 </div>
