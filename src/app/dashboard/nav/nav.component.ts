@@ -1,3 +1,4 @@
+import { LoadingService } from './../../_helpers/loading.service'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
@@ -15,16 +16,26 @@ export class NavComponent implements OnInit {
     map((result) => result.matches),
     shareReplay()
   )
+  loading: boolean
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authenticationService: AuthenticationService,
-    private route: Router
+    private route: Router,
+    private loadingService: LoadingService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadingObservable()
+  }
 
   logout() {
     this.authenticationService.logout()
     this.route.navigate(['/login'])
+  }
+
+  loadingObservable() {
+    return this.loadingService.getLoadingObservable().subscribe((loading) => {
+      this.loading = loading
+    })
   }
 }

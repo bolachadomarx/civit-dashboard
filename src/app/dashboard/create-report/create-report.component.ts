@@ -1,3 +1,4 @@
+import { LoadingService } from './../../_helpers/loading.service'
 import { CategoryModel } from './../../_models/category'
 import { CategoryService } from './../../_services/category.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -30,8 +31,10 @@ export class CreateReportComponent implements OnInit {
     private _ngZone: NgZone,
     private incidentService: IncidentService,
     private categoryService: CategoryService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loadingService: LoadingService
   ) {
+    this.loadingService.setLoading()
     this.incidentForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(150)]],
@@ -53,7 +56,10 @@ export class CreateReportComponent implements OnInit {
       }
     })
 
-    this.categoryService.get().subscribe((res) => (this.categories = res))
+    this.categoryService.get().subscribe((res) => {
+      this.categories = res
+      this.loadingService.clearLoading()
+    })
   }
 
   triggerResize() {
@@ -81,7 +87,7 @@ export class CreateReportComponent implements OnInit {
       reader.readAsBinaryString(file)
     })
 
-    this.incidentForm.get('images').setValue(String(this.images))
+    this.incidentForm.get('images').setValue(this.images)
     this.incidentForm.get('images').updateValueAndValidity()
   }
 
@@ -94,6 +100,7 @@ export class CreateReportComponent implements OnInit {
     this.loading = true
     this.processImages(this.files)
     const incident = this.incidentForm.value
+    console.log(incident)
 
     return this.incidentService.create(incident).subscribe(
       (res) => {

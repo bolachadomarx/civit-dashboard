@@ -27,6 +27,8 @@ export class AuthenticationService {
       })
       .pipe(
         map((user) => {
+          console.log(user)
+
           localStorage.setItem('currentUser', JSON.stringify(user))
           this.currentUserSubject.next(user)
           return user

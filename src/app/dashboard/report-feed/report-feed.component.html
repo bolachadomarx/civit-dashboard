@@ -5,7 +5,7 @@
         <mat-card-title>{{incident.title}}</mat-card-title>
         <mat-card-subtitle>{{incident.category}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <img mat-card-image [src]="incident.images[0]" alt="Photo of a Shiba Inu">
       <app-maps mat-card-image [center]="{ lat: incident.latitude, lng: incident.longitude }" [height]="250"
         [zoom]="10">
       </app-maps>

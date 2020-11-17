@@ -47,3 +47,16 @@
 .icon {
   color: white;
 }
+
+.foreground {
+  backdrop-filter: saturate(150%) blur(10px);
+}
+
+.center {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+.background {
+  opacity: 20%;
+}

@@ -30,8 +30,17 @@
       </button>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <div style="height: 88vh;">
-      <router-outlet></router-outlet>
+    <div [ngClass]="{'foreground': loading}" style="height: 88vh;">
+      <div class="center" fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="100">
+          <mat-spinner class="mx-auto center" *ngIf="loading" [diameter]="50">
+          </mat-spinner>
+        </div>
+      </div>
+      <div [ngClass]="{'background': loading}">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

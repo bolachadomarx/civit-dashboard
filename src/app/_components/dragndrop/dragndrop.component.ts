@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-dragndrop',
@@ -8,12 +9,24 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 export class DragndropComponent implements OnInit {
   @Input() files: any[] = []
   @Output() filesChange = new EventEmitter<any[]>()
-  constructor() {}
+  constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
   onFileDropped($event) {
-    this.prepareFilesList($event)
+    let validFiles = []
+    let hasInvalid
+    for (const file of $event) {
+      if (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg') {
+        validFiles.push(file)
+      } else {
+        hasInvalid = true
+      }
+    }
+    if (hasInvalid) {
+      this.toastr.warning('Apenas arquivos PNG, JPG ou JPEG são aceitos')
+    }
+    this.prepareFilesList(validFiles)
   }
 
   fileBrowseHandler(files) {
