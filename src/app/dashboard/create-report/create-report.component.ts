@@ -1,3 +1,5 @@
+import { CategoryModel } from './../../_models/category'
+import { CategoryService } from './../../_services/category.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { IncidentService } from './../../_services/incident.service'
 import { CdkTextareaAutosize } from '@angular/cdk/text-field'
@@ -5,6 +7,7 @@ import { HttpClient } from '@angular/common/http'
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, map, take } from 'rxjs/operators'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-create-report',
@@ -17,14 +20,21 @@ export class CreateReportComponent implements OnInit {
 
   fb: FormBuilder = new FormBuilder()
   incidentForm: FormGroup
-  categories = ['Tipo 01', 'Tipo 02', 'Tipo 03']
+  categories: CategoryModel[]
 
   images: any[] = []
+  center: { lat: number; lng: number }
+  loading: boolean
 
-  constructor(private _ngZone: NgZone, private incidentService: IncidentService) {
+  constructor(
+    private _ngZone: NgZone,
+    private incidentService: IncidentService,
+    private categoryService: CategoryService,
+    private toastr: ToastrService
+  ) {
     this.incidentForm = this.fb.group({
       title: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(150)]],
       category: ['', Validators.required],
       date: [new Date(), Validators.required],
       longitude: ['', Validators.required],
@@ -33,7 +43,18 @@ export class CreateReportComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position)
+
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+    })
+
+    this.categoryService.get().subscribe((res) => (this.categories = res))
+  }
 
   triggerResize() {
     // Wait for changes to be applied, then trigger textarea resize.
@@ -59,8 +80,6 @@ export class CreateReportComponent implements OnInit {
       reader.onload = this.handleFile.bind(this)
       reader.readAsBinaryString(file)
     })
-    console.log(String(this.images))
-    console.log(this.images.toString())
 
     this.incidentForm.get('images').setValue(String(this.images))
     this.incidentForm.get('images').updateValueAndValidity()
@@ -68,20 +87,26 @@ export class CreateReportComponent implements OnInit {
 
   handleFile(event) {
     var binaryString = event.target.result
-    this.images.push(btoa(binaryString))
+    this.images.push('data:image/png;base64,' + btoa(binaryString))
   }
 
   save() {
+    this.loading = true
     this.processImages(this.files)
     const incident = this.incidentForm.value
-    console.log(incident)
 
     return this.incidentService.create(incident).subscribe(
       (res) => {
-        console.log(res)
+        this.loading = false
+        this.toastr.success('Denúncia enviada para análise', 'Sucesso')
+        this.incidentForm.reset()
+        this.ngOnInit()
       },
       (error) => {
-        console.log(error)
+        this.loading = false
+        this.toastr.warning('Falha ao enviar denúncia', 'Erro')
+        this.incidentForm.reset()
+        this.ngOnInit()
       }
     )
   }

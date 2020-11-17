@@ -13,8 +13,8 @@
         </mat-form-field>
         <mat-form-field class="w-100" fxFlex="100" appearance="standard">
           <mat-select formControlName="category" placeholder="Tipo de incidente" name="item">
-            <mat-option *ngFor="let category of categories" [value]="category">
-              {{category}}
+            <mat-option *ngFor="let category of categories" [value]="category.name">
+              {{category.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -23,22 +23,28 @@
           <mat-label>Descrição do problema</mat-label>
           <textarea formControlName="description" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+          <mat-hint>Máximo de 150 caracteres</mat-hint>
         </mat-form-field>
-        <div fxFlex="100">
+        <div class="my-4" fxFlex="100">
+          <h2>Precisaremos de imagens que comprovem o ocorrido</h2>
+          <p>Para enviar as fotos você pode arrastá-las para o card abaixo ou clicar sobre o mesmo</p>
           <app-dragndrop [files]="files" (filesChange)="updateFiles($event)"></app-dragndrop>
-
         </div>
-        <div fxFlexFill fxFlex="100">
-          <app-maps (mark)="mark($event)" style="min-height: 1900px;"
-            [center]="{ lat: -22.423598852829794, lng: -45.45821814058468 }" [markerOptions]="{draggable: false}">
+        <div class="my-4" fxFlexFill fxFlex="100">
+          <h2>Em que local ocorreu a denúncia?</h2>
+          <p>Para escolher o local da denúncia basta clicar no respectivo local no mapa</p>
+          <app-maps [zoom]="15" (mark)="mark($event)" style="min-height: 1900px;" [center]="center" [height]="300">
           </app-maps>
         </div>
 
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="incidentForm.invalid" color="primary" (click)="save()" mat-raised-button>Enviar
+      <button *ngIf="!loading" [disabled]="incidentForm.invalid" color="primary" (click)="save()"
+        mat-raised-button>Enviar
         denúncia</button>
+      <mat-spinner *ngIf="loading" [diameter]="30">
+      </mat-spinner>
     </mat-card-actions>
   </mat-card>
 </div>

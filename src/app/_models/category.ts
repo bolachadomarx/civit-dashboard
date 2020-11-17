@@ -1,0 +1,11 @@
+export interface CategoryModel {
+  id: string
+  name: string
+  description: string
+  __v: number
+}
+
+export interface CreateCategoryModel {
+  name: string
+  description: string
+}

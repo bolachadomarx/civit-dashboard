@@ -1,3 +1,4 @@
-<google-map style="min-height: 900px;" [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
-  <map-marker [position]="markerPosition" [options]="markerOptions"></map-marker>
+<google-map [options]="mapOptions" [height]="height" width="100%" [center]="center" [zoom]="zoom"
+  (mapClick)="addMarker($event)">
+  <map-marker [position]="markerPosition"></map-marker>
 </google-map>

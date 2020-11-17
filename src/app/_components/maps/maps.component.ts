@@ -12,9 +12,18 @@ export class MapsComponent implements OnInit {
   apiLoaded: Observable<boolean>
 
   @Input() center: google.maps.LatLngLiteral
-  zoom = 15
-  @Input() markerOptions: google.maps.MarkerOptions
+  @Input() zoom: number
+
+  mapOptions: google.maps.MapOptions = {
+    zoomControl: false,
+    scrollwheel: false,
+    disableDoubleClickZoom: true,
+    maxZoom: 15,
+    minZoom: 8,
+  }
   markerPosition: google.maps.LatLngLiteral
+
+  @Input() height: number
 
   @Output()
   mark = new EventEmitter<google.maps.LatLngLiteral>()

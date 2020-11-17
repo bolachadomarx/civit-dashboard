@@ -16,6 +16,5 @@ export class ReportFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.incidentService.get().subscribe((incidents) => (this.incidents = incidents))
-    console.log(this.incidents)
   }
 }
