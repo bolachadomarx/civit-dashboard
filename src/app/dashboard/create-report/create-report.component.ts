@@ -87,7 +87,7 @@ export class CreateReportComponent implements OnInit {
       reader.readAsBinaryString(file)
     })
 
-    this.incidentForm.get('images').setValue(this.images)
+    this.incidentForm.get('images').setValue({ photos: this.images })
     this.incidentForm.get('images').updateValueAndValidity()
   }
 

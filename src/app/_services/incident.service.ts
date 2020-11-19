@@ -1,7 +1,7 @@
 import { CreateIncidentModel, IncidentModel } from './../_models/incident'
 import { environment } from './../../environments/environment.prod'
 import { Observable } from 'rxjs'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { UserModel } from '../_models/user'
 
@@ -25,7 +25,6 @@ export class IncidentService {
 
   create(incidentData: CreateIncidentModel) {
     console.log(incidentData)
-
     return this.http.post(`${this.url}/incidents`, incidentData)
   }
 

@@ -15,7 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http'
 import { GoogleMapsModule } from '@angular/google-maps'
-import { MapsComponent } from '../_components/maps/maps.component'
+import { MapsComponent } from '../_components/maps/maps.component';
+import { CreateNewsComponent } from './create-news/create-news.component';
+import { NewsComponent } from './news/news.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { MapsComponent } from '../_components/maps/maps.component'
     ProgressComponent,
     MapsComponent,
     DndDirective,
+    CreateNewsComponent,
+    NewsComponent,
   ],
   imports: [
     CommonModule,

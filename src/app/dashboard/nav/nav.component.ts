@@ -17,6 +17,7 @@ export class NavComponent implements OnInit {
     shareReplay()
   )
   loading: boolean
+  currentUser: import('f:/faculdade/dev/civit-dashboard/src/app/_models/user').UserModel
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authenticationService: AuthenticationService,
@@ -25,6 +26,8 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authenticationService.currentUserValue
+
     this.loadingObservable()
   }
 
