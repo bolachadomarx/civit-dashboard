@@ -1,40 +1,30 @@
 <div fxLayout="row" fxLayoutGap="10px" class="m-3">
-  <mat-card fxFlex="50" [formGroup]="articleForm">
+  <mat-card fxFlex="50">
     <mat-card-header>
-      <mat-card-title>Enviar notícia</mat-card-title>
-      <mat-card-subtitle>Para enviar a notícia você deve adicionar uma foto e algumas informações a respeito.
-      </mat-card-subtitle>
+      <mat-card-title>title</mat-card-title>
+      <mat-card-subtitle>subtitle</mat-card-subtitle>
     </mat-card-header>
-    <div fxLayout="column">
+    <mat-card-content fxLayout="column" [formGroup]="categoryForm">
       <mat-form-field class="w-100" fxFlex="100" appearance="standard">
-        <mat-label>Título da notícia</mat-label>
-        <input formControlName="title" matInput placeholder="Título da notícia">
+        <mat-label>Nome da categoria</mat-label>
+        <input formControlName="name" matInput placeholder="Título da categoria">
       </mat-form-field>
-      <div fxFlex="100">
-        <h3 class="my-3 text-bold">Adicione uma imagem para sua notícia</h3>
-        <app-dragndrop [files]="files" (filesChange)="updateFiles($event)"></app-dragndrop>
-      </div>
-
-      <mat-form-field class="my-3" fxFlex="100">
-        <mat-label>Resumo da notícia</mat-label>
-        <textarea formControlName="text" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
-        <mat-hint>Máximo de 1000 caracteres</mat-hint>
+      <mat-form-field class="w-100" fxFlex="100" appearance="standard">
+        <mat-label>Descrição da categoria</mat-label>
+        <input formControlName="description" matInput placeholder="Descrição da categoria">
       </mat-form-field>
-    </div>
-
+    </mat-card-content>
     <mat-card-actions>
-      <button *ngIf="!loading && !editing" [disabled]="articleForm.invalid" color="primary" (click)="save()"
+      <button *ngIf="!loading && !editing" [disabled]="categoryForm.invalid" color="primary" (click)="create()"
         mat-raised-button>Enviar
-        denúncia</button>
-      <button *ngIf="!loading && editing" [disabled]="articleForm.invalid" color="primary" (click)="update()"
+        categoria</button>
+      <button *ngIf="!loading && editing" [disabled]="categoryForm.invalid" color="primary" (click)="update()"
         mat-raised-button>Atualizar
-        denúncia</button>
+        categoria</button>
       <mat-spinner *ngIf="loading" [diameter]="30">
       </mat-spinner>
 
     </mat-card-actions>
-
   </mat-card>
   <div class="w-100" fxFlexFill fxFlex="50">
     <div fxLayout="column">
@@ -48,15 +38,15 @@
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
 
           <!-- Position Column -->
-          <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Título </th>
-            <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="text">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Resumo da notícia </th>
-            <td mat-cell *matCellDef="let row"> {{row.text | slice:0:50}} </td>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </th>
+            <td mat-cell *matCellDef="let row"> {{row.description}} </td>
           </ng-container>
 
           <!-- Weight Column -->

@@ -1,15 +1,18 @@
 <div class="p-3">
-  <div fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="space-around center">
-    <mat-card class="my-4" *ngFor="let incident of incidents" fxFlex="20" fxFlex.sm="50" fxFlex.xs="100">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <mat-card class="my-4" *ngFor="let incident of incidents" fxFlex="40" fxFlex.sm="50" fxFlex.xs="100">
       <mat-card-header>
-        <mat-card-title>{{incident.title}}</mat-card-title>
-        <mat-card-subtitle>{{incident.category}}</mat-card-subtitle>
+        <mat-card-title class="text-bold">{{incident.title}}</mat-card-title>
+        <mat-card-subtitle class="text-bold">Tipo de incidente: {{incident.category}}</mat-card-subtitle>
+        <mat-card-subtitle>{{incident.date | date: 'shortDate'}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image [src]="incident.images[0]" alt="Photo of a Shiba Inu">
+      <img mat-card-image [src]="image" alt="Photo of a Shiba Inu">
       <app-maps mat-card-image [center]="{ lat: incident.latitude, lng: incident.longitude }" [height]="250"
         [zoom]="10">
       </app-maps>
       <mat-card-content style="min-height: 100px; max-height: 100px;">
+        <h3>Situação da denúncia: <b>{{incident.status}}</b> </h3>
+        <h4 class="text-bold">Descrição do ocorrido</h4>
         <p>
           {{incident.description}}
         </p>

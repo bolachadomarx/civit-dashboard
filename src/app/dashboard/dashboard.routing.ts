@@ -1,3 +1,6 @@
+import { CategoriesComponent } from './categories/categories.component'
+import { NewsComponent } from './news/news.component'
+import { CreateNewsComponent } from './create-news/create-news.component'
 import { FaqComponent } from './faq/faq.component'
 import { ReportFeedComponent } from './report-feed/report-feed.component'
 import { CreateReportComponent } from './create-report/create-report.component'
@@ -26,6 +29,18 @@ export const DashboardRoutes: Routes = [
       {
         path: 'denuncia/feed',
         component: ReportFeedComponent,
+      },
+      {
+        path: 'noticias/manutencao',
+        component: CreateNewsComponent,
+      },
+      {
+        path: 'noticias/feed',
+        component: NewsComponent,
+      },
+      {
+        path: 'categorias/manutencao',
+        component: CategoriesComponent,
       },
       {
         path: 'faq',

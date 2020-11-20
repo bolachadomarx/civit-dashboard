@@ -1,1 +1,22 @@
-<p>news works!</p>
+<div class="p-3">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <mat-card class="my-4" *ngFor="let article of articles" fxFlex="40" fxFlex.sm="50" fxFlex.xs="100">
+      <mat-card-header>
+        <mat-card-title class="text-bold">{{article.title}}</mat-card-title>
+        <mat-card-subtitle class="text-bold">{{article.createdAt | date: 'shortDate'}}</mat-card-subtitle>
+
+      </mat-card-header>
+      <div style="height: 300px;overflow: hidden;">
+        <img mat-card-image [src]="article.featuredImage">
+
+      </div>
+
+      <mat-card-content class="my-3">
+        <h4 class="text-bold">Resumo da notícia</h4>
+        <p>
+          {{article.text}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

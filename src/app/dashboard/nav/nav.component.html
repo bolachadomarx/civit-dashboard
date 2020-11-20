@@ -13,11 +13,17 @@
       <a mat-list-item routerLink="/dashboard/denuncia/feed" routerLinkActive="active-list-item">
         <mat-icon class="icon">contactless</mat-icon> <span class="nav-caption">Feed de denúncias</span>
       </a>
-      <a mat-list-item routerLink="/dashboard/denuncia/feed" routerLinkActive="active-list-item">
+      <a *ngIf="currentUser.role === 'admin'" mat-list-item routerLink="/dashboard/noticias/manutencao"
+        routerLinkActive="active-list-item">
         <mat-icon class="icon">contactless</mat-icon> <span class="nav-caption">Manutenção de notícias</span>
       </a>
-      <a mat-list-item routerLink="/dashboard/denuncia/feed" routerLinkActive="active-list-item">
-        <mat-icon class="icon">contactless</mat-icon> <span class="nav-caption">Cadastrar categorias</span>
+      <a *ngIf="currentUser.role === 'admin'" mat-list-item routerLink="/dashboard/categorias/manutencao"
+        routerLinkActive="active-list-item">
+        <mat-icon class="icon">contactless</mat-icon> <span class="nav-caption">Manutenção de categorias</span>
+      </a>
+      <a *ngIf="currentUser.role === 'admin'" mat-list-item routerLink="/dashboard/noticias/feed"
+        routerLinkActive="active-list-item">
+        <mat-icon class="icon">contactless</mat-icon> <span class="nav-caption">Feed de notícias</span>
       </a>
       <a mat-list-item routerLink="/dashboard/faq" routerLinkActive="active-list-item">
         <mat-icon class="icon">info</mat-icon> <span class="nav-caption">Faq</span>

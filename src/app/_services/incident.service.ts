@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { UserModel } from '../_models/user'
-
+import axios from 'axios'
 @Injectable({ providedIn: 'root' })
 export class IncidentService {
   url = environment.api
@@ -23,9 +23,18 @@ export class IncidentService {
     return this.http.put(`${this.url}/incidents/${id}`, { status })
   }
 
-  create(incidentData: CreateIncidentModel) {
-    console.log(incidentData)
-    return this.http.post(`${this.url}/incidents`, incidentData)
+  async create(incidentData: CreateIncidentModel) {
+    axios({
+      url: `${this.url}/incidents/`,
+      method: 'post',
+      data: incidentData,
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   delete(id: string) {

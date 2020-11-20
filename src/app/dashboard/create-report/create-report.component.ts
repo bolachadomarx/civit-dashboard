@@ -1,6 +1,5 @@
 import { LoadingService } from './../../_helpers/loading.service'
 import { CategoryModel } from './../../_models/category'
-import { CategoryService } from './../../_services/category.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { IncidentService } from './../../_services/incident.service'
 import { CdkTextareaAutosize } from '@angular/cdk/text-field'
@@ -9,6 +8,7 @@ import { Component, NgZone, OnInit, ViewChild } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, map, take } from 'rxjs/operators'
 import { ToastrService } from 'ngx-toastr'
+import { CategoriesService } from 'src/app/_services/categories.service'
 
 @Component({
   selector: 'app-create-report',
@@ -30,7 +30,7 @@ export class CreateReportComponent implements OnInit {
   constructor(
     private _ngZone: NgZone,
     private incidentService: IncidentService,
-    private categoryService: CategoryService,
+    private categoryService: CategoriesService,
     private toastr: ToastrService,
     private loadingService: LoadingService
   ) {
@@ -102,19 +102,12 @@ export class CreateReportComponent implements OnInit {
     const incident = this.incidentForm.value
     console.log(incident)
 
-    return this.incidentService.create(incident).subscribe(
-      (res) => {
-        this.loading = false
-        this.toastr.success('Denúncia enviada para análise', 'Sucesso')
-        this.incidentForm.reset()
-        this.ngOnInit()
-      },
-      (error) => {
-        this.loading = false
-        this.toastr.warning('Falha ao enviar denúncia', 'Erro')
-        this.incidentForm.reset()
-        this.ngOnInit()
-      }
-    )
+    const createdIncident = this.incidentService.create(incident)
+    if (createdIncident) {
+      this.loading = false
+      this.toastr.success('Denúncia enviada para análise', 'Sucesso')
+      this.incidentForm.reset()
+      this.ngOnInit()
+    }
   }
 }

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 
 @Injectable({ providedIn: 'root' })
-export class CategoryService {
+export class CategoriesService {
   url = environment.api
 
   constructor(private http: HttpClient) {}
@@ -17,14 +17,15 @@ export class CategoryService {
     return this.http.get<CategoryModel>(`${this.url}/categories/${id}`)
   }
 
-  update(id: string, status: string) {
-    return this.http.put(`${this.url}/categories/${id}`, { status })
+  update(id: string, categoria: CreateCategoryModel) {
+    console.log(categoria)
+
+    return this.http.put(`${this.url}/categories/${id}`, categoria)
   }
 
-  create(incidentData: CreateCategoryModel) {
-    console.log(incidentData)
-
-    return this.http.post(`${this.url}/categories`, incidentData)
+  create(categoria: CreateCategoryModel) {
+    console.log(categoria)
+    return this.http.post(`${this.url}/categories`, categoria)
   }
 
   delete(id: string) {

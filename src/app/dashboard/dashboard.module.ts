@@ -17,7 +17,8 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http'
 import { GoogleMapsModule } from '@angular/google-maps'
 import { MapsComponent } from '../_components/maps/maps.component';
 import { CreateNewsComponent } from './create-news/create-news.component';
-import { NewsComponent } from './news/news.component'
+import { NewsComponent } from './news/news.component';
+import { CategoriesComponent } from './categories/categories.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NewsComponent } from './news/news.component'
     DndDirective,
     CreateNewsComponent,
     NewsComponent,
+    CategoriesComponent,
   ],
   imports: [
     CommonModule,

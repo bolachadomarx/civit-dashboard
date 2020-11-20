@@ -20,7 +20,7 @@
         <mat-list class="w-100">
           <div mat-subheader>Fotos</div>
           <mat-list-item class="w-100" fxLayout="row" *ngFor="let file of files; let i = index">
-            <div fxFlex="90">
+            <div fxFlexFill fxFlex="90">
               <mat-icon mat-list-icon>folder</mat-icon>
               <div mat-line class="w-100"> {{ file?.name }} </div>
               <div mat-line> {{ formatBytes(file?.size, 2) }} </div>
