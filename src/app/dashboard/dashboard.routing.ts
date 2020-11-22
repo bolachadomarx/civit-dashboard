@@ -1,3 +1,4 @@
+import { ReportsComponent } from './reports/reports.component'
 import { CategoriesComponent } from './categories/categories.component'
 import { NewsComponent } from './news/news.component'
 import { CreateNewsComponent } from './create-news/create-news.component'
@@ -41,6 +42,10 @@ export const DashboardRoutes: Routes = [
       {
         path: 'categorias/manutencao',
         component: CategoriesComponent,
+      },
+      {
+        path: 'relatorios',
+        component: ReportsComponent,
       },
       {
         path: 'faq',

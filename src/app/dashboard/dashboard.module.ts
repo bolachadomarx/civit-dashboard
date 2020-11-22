@@ -18,7 +18,10 @@ import { GoogleMapsModule } from '@angular/google-maps'
 import { MapsComponent } from '../_components/maps/maps.component';
 import { CreateNewsComponent } from './create-news/create-news.component';
 import { NewsComponent } from './news/news.component';
-import { CategoriesComponent } from './categories/categories.component'
+import { CategoriesComponent } from './categories/categories.component';
+import { ReportsComponent } from './reports/reports.component';
+import { IncidentsTableComponent } from './reports/incidents-table/incidents-table.component';
+import { ArticlesTableComponent } from './reports/articles-table/articles-table.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { CategoriesComponent } from './categories/categories.component'
     CreateNewsComponent,
     NewsComponent,
     CategoriesComponent,
+    ReportsComponent,
+    IncidentsTableComponent,
+    ArticlesTableComponent,
   ],
   imports: [
     CommonModule,
