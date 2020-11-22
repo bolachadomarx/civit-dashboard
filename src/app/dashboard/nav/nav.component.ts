@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
     shareReplay()
   )
   loading: boolean
-  currentUser: import('f:/faculdade/dev/civit-dashboard/src/app/_models/user').UserModel
+  currentUser: import('../../_models/user').UserModel
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authenticationService: AuthenticationService,
