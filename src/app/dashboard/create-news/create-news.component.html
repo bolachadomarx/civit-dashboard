@@ -26,10 +26,10 @@
     <mat-card-actions>
       <button *ngIf="!loading && !editing" [disabled]="articleForm.invalid" color="primary" (click)="save()"
         mat-raised-button>Enviar
-        denúncia</button>
+        notícia</button>
       <button *ngIf="!loading && editing" [disabled]="articleForm.invalid" color="primary" (click)="update()"
         mat-raised-button>Atualizar
-        denúncia</button>
+        notícia</button>
       <mat-spinner *ngIf="loading" [diameter]="30">
       </mat-spinner>
 

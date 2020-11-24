@@ -1,21 +1,26 @@
 <div class="p-3">
-  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+  <div fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="space-around center">
     <mat-card class="my-4" *ngFor="let incident of incidents" fxFlex="40" fxFlex.sm="50" fxFlex.xs="100">
       <mat-card-header>
         <mat-card-title class="text-bold">{{incident.title}}</mat-card-title>
         <mat-card-subtitle class="text-bold">Tipo de incidente: {{incident.category}}</mat-card-subtitle>
         <mat-card-subtitle>{{incident.date | date: 'shortDate'}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image [src]="image" alt="Photo of a Shiba Inu">
+      <img style="height: 300px;overflow: hidden;" mat-card-image [src]="incident.images.image1">
       <app-maps mat-card-image [center]="{ lat: incident.latitude, lng: incident.longitude }" [height]="250"
         [zoom]="10">
       </app-maps>
-      <!--<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutGap.xs="50" fxLayoutAlign="center center" style="margin-top:1em; margin-bottom: 2em;" >
-        <button mat-raised-button color="default" fxFlex="30" fxFlex.xs="100" (click)="update(incident._id, 'AGUARDANDO')">Aguardando</button>
-        <button mat-raised-button color="accent" fxFlex="30" fxFlex.xs="100" (click)="update(incident._id, 'PROCESSANDO')">Processando</button>
-        <button mat-raised-button color="warn" fxFlex="30" fxFlex.xs="100" (click)="update(incident._id, 'FINALIZADO')">Finalizado</button>
-      </div>-->
-      
+
+      <div *ngIf="user.role === 'admin'" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="20px"
+        fxLayoutAlign="center center" style="margin-top:1em; margin-bottom: 2em;">
+        <button mat-raised-button color="default" fxFlex="30" fxFlex.xs="100"
+          (click)="update(incident._id, 'AGUARDANDO')">Aguardando</button>
+        <button mat-raised-button color="accent" fxFlex="30" fxFlex.xs="100"
+          (click)="update(incident._id, 'PROCESSANDO')">Processando</button>
+        <button mat-raised-button color="warn" fxFlex="30" fxFlex.xs="100"
+          (click)="update(incident._id, 'FINALIZADO')">Finalizado</button>
+      </div>
+
       <mat-card-content style="min-height: 100px; max-height: 100px;">
         <h3>Situação da denúncia: <b>{{incident.status}}</b> </h3>
         <h4 class="text-bold">Descrição do ocorrido</h4>

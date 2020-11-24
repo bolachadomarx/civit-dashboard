@@ -40,4 +40,8 @@ export class IncidentService {
   delete(id: string) {
     return this.http.delete(`${this.url}/incidents/${id}`)
   }
+
+  all() {
+    return this.http.get(`${this.url}/incidents/all`)
+  }
 }

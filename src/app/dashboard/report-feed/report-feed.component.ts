@@ -1,3 +1,4 @@
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { myFile } from './file'
 import { LoadingService } from './../../_helpers/loading.service'
 import { IncidentService } from './../../_services/incident.service'
@@ -16,9 +17,11 @@ export class ReportFeedComponent implements OnInit {
   incidents: IncidentModel[]
   image = myFile
   loading: boolean = false
+  user: import("f:/faculdade/dev/civit-dashboard/src/app/_models/user").UserModel;
 
-  constructor(private incidentService: IncidentService, private loadingService: LoadingService, private toastr: ToastrService) {
+  constructor(private incidentService: IncidentService, private loadingService: LoadingService, private toastr: ToastrService, private authenticationService: AuthenticationService) {
     this.loadingService.setLoading()
+    this.user = this.authenticationService.currentUserValue
   }
 
   update(id: string, status: string) {

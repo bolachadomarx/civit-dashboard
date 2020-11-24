@@ -1,3 +1,4 @@
+import { ChartsComponent } from './charts/charts.component'
 import { ReportsComponent } from './reports/reports.component'
 import { CategoriesComponent } from './categories/categories.component'
 import { NewsComponent } from './news/news.component'
@@ -21,7 +22,7 @@ export const DashboardRoutes: Routes = [
       },
       {
         path: 'home',
-        component: HomeComponent,
+        component: ChartsComponent,
       },
       {
         path: 'denuncia/enviar',
@@ -47,6 +48,7 @@ export const DashboardRoutes: Routes = [
         path: 'relatorios',
         component: ReportsComponent,
       },
+
       {
         path: 'faq',
         component: FaqComponent,

@@ -21,7 +21,8 @@ import { NewsComponent } from './news/news.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ReportsComponent } from './reports/reports.component';
 import { IncidentsTableComponent } from './reports/incidents-table/incidents-table.component';
-import { ArticlesTableComponent } from './reports/articles-table/articles-table.component'
+import { ArticlesTableComponent } from './reports/articles-table/articles-table.component';
+import { ChartsComponent } from './charts/charts.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ArticlesTableComponent } from './reports/articles-table/articles-table.
     ReportsComponent,
     IncidentsTableComponent,
     ArticlesTableComponent,
+    ChartsComponent,
   ],
   imports: [
     CommonModule,

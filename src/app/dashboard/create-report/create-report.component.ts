@@ -26,6 +26,9 @@ export class CreateReportComponent implements OnInit {
   images: any[] = []
   center: { lat: number; lng: number }
   loading: boolean
+  image1: any
+  image2: any
+  image3: any
 
   constructor(
     private _ngZone: NgZone,
@@ -42,7 +45,7 @@ export class CreateReportComponent implements OnInit {
       date: [new Date(), Validators.required],
       longitude: ['', Validators.required],
       latitude: ['', Validators.required],
-      images: [Validators.required],
+      images: [''],
     })
   }
 
@@ -74,37 +77,42 @@ export class CreateReportComponent implements OnInit {
   }
 
   updateFiles(event) {
-    let fileList = event
-    for (var i = 0; i < fileList.length; i++) {
-      this.files.push(fileList[i])
+    let fileList: File[] = event
+    if (fileList.length > 1 || this.files.length === 1) {
+      this.toastr.warning('Não é possível adicionar mais de uma image', 'Ops')
+      return false
     }
+    this.files.push(fileList[0])
+    console.log(this.files)
+
+    this.processImages(this.files)
   }
 
   processImages(files: File[]) {
-    files.map(async (file) => {
+    files.map((file) => {
       const reader = new FileReader()
       reader.onload = this.handleFile.bind(this)
       reader.readAsBinaryString(file)
     })
-
-    this.incidentForm.get('images').setValue({ photos: this.images })
-    this.incidentForm.get('images').updateValueAndValidity()
   }
 
   handleFile(event) {
     var binaryString = event.target.result
-    this.images.push('data:image/png;base64,' + btoa(binaryString))
+    this.incidentForm.get('images').setValue({ image1: 'data:image/png;base64,' + btoa(binaryString) })
   }
 
-  save() {
+  async save() {
     this.loading = true
-    this.processImages(this.files)
+    await this.processImages(this.files)
+    const images = Object.assign({}, { image1: this.image1, image2: this.image2, image3: this.image3 })
+    console.log(this.image1)
+
     const incident = this.incidentForm.value
-    console.log(incident)
 
     const createdIncident = this.incidentService.create(incident)
     if (createdIncident) {
       this.loading = false
+      this.files = []
       this.toastr.success('Denúncia enviada para análise', 'Sucesso')
       this.incidentForm.reset()
       this.ngOnInit()
