@@ -10,6 +10,12 @@
       <app-maps mat-card-image [center]="{ lat: incident.latitude, lng: incident.longitude }" [height]="250"
         [zoom]="10">
       </app-maps>
+      <!--<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutGap.xs="50" fxLayoutAlign="center center" style="margin-top:1em; margin-bottom: 2em;" >
+        <button mat-raised-button color="default" fxFlex="30" fxFlex.xs="100" (click)="update(incident._id, 'AGUARDANDO')">Aguardando</button>
+        <button mat-raised-button color="accent" fxFlex="30" fxFlex.xs="100" (click)="update(incident._id, 'PROCESSANDO')">Processando</button>
+        <button mat-raised-button color="warn" fxFlex="30" fxFlex.xs="100" (click)="update(incident._id, 'FINALIZADO')">Finalizado</button>
+      </div>-->
+      
       <mat-card-content style="min-height: 100px; max-height: 100px;">
         <h3>Situação da denúncia: <b>{{incident.status}}</b> </h3>
         <h4 class="text-bold">Descrição do ocorrido</h4>
